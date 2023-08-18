@@ -14,7 +14,12 @@ const GraphDetails = ({ data, index, isActive, onClick }) => {
     >
       <p className="text-lg font-semibold mb-2 text-white">Graph {index + 1}</p>
       <p className="text-white">
-        <span className="font-semibold">Eigenstate:</span> {data.eigenstate}
+        <span className="font-semibold">Eigenstate:</span>
+        {Object.values(data.eigenstate).map((state, index) => (
+          <span key={index} className={`
+          ma
+          `}
+        ))}
       </p>
       <p className="text-white">
         <span className="font-semibold">Eigenvalue:</span> {data.eigenvalue}
