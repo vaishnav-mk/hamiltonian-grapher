@@ -5,10 +5,16 @@ from qiskit import Aer
 from qiskit.algorithms.optimizers import SPSA
 from qiskit.algorithms import VQE
 from qiskit.opflow import I, Z, X, Y, PauliOp
-from qiskit.circuit.library import TwoLocal
+# from qiskit.circuit.library import TwoLocal
 from qiskit.utils import QuantumInstance
 from fastapi.encoders import jsonable_encoder
 from matplotlib import pyplot as plt
+
+from qiskit.quantum_info import SparsePauliOp
+from qiskit.circuit.library import TwoLocal
+from qiskit.primitives import Estimator
+from qiskit.algorithms.minimum_eigensolvers import VQE
+from qiskit.algorithms.optimizers import SLSQP
 
 app = FastAPI()
 
@@ -28,6 +34,25 @@ def plot(values):
     plt.plot(values)
     plt.show()
 
+@app.post("/eigen-try")
+def ctry(hamiltonian: HamiltonianInput, iterations: int = 5):
+    H2_op = SparsePauliOp.from_list([
+        (term.operator, term.coefficient) for term in hamiltonian.terms
+    ])
+    num_assets = len(hamiltonian.terms[0].operator)
+    ansatz = TwoLocal(num_assets, "ry", "cz", reps=3, entanglement="full")
+    estimator = Estimator()
+    vqe = VQE(ansatz=ansatz, estimator=estimator, optimizer=SLSQP(1000))    
+    results = []
+    for _ in range(iterations):
+        result = vqe.compute_minimum_eigenvalue(H2_op)
+        print(result)
+        results.append({
+            "eigenstate": str(result.eigenstate),
+            "eigenvalue": str(result.eigenvalue),
+            "variational_parameters": list(result.optimal_parameters.values()),
+        })
+    return results
 
 
 @app.post("/eigen")
