@@ -11,5 +11,4 @@ uvicorn main:app
 
 # Development
 uvicorn main:app --reload
-
 ```

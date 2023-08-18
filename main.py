@@ -30,12 +30,12 @@ def plot(values):
 
 
 
-@app.post("/balls")
+@app.post("/eigen")
 def calculate_eigenvalues(hamiltonian: HamiltonianInput, iterations: int = 5):
     pauli_terms = []
     for term in hamiltonian.terms:
         pauli_term = term.coefficient * I
-        for char in term.operator:
+        for char in term.operator.strip():
             if char == "I":
                 continue
             if char == "X":
