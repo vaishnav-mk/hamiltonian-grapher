@@ -4,7 +4,7 @@ from typing import List
 from qiskit import Aer
 from qiskit.algorithms.optimizers import SPSA
 from qiskit.algorithms import VQE
-from qiskit.opflow import I, Z, X, Y, PauliSumOp
+from qiskit.opflow import I, Z, X, Y, PauliOp
 from qiskit.circuit.library import TwoLocal
 from qiskit.utils import QuantumInstance
 from fastapi.encoders import jsonable_encoder
@@ -48,12 +48,10 @@ def calculate_eigenvalues(hamiltonian: HamiltonianInput, iterations: int = 5):
                 raise ValueError("Invalid Pauli operator:", char)
         pauli_terms.append(pauli_term)
     
-    print([str(i) for i in pauli_terms])
-    hamiltonian_op = sum(pauli_terms)
+    hamiltonian_op = PauliOp(pauli_term.primitive, sum([i.coeff for i in pauli_terms]))
 
     num_assets = len(hamiltonian.terms[0].operator)
     ansatz = TwoLocal(num_assets, "ry", "cz", reps=3, entanglement="full")
-    print(ansatz)
 
     backend = Aer.get_backend("aer_simulator")
 
