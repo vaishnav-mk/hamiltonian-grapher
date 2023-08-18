@@ -96,6 +96,10 @@ const InputForm = () => {
     setGraphType((prevType) => (prevType === "all" ? "average" : "all"));
   };
 
+  const handleGraphClick = (index) => {
+    setActiveGraphIndex(index);
+  };
+
   return (
     <div className="flex flex-row gap-4">
       <div className="flex flex-col gap-4">
@@ -295,6 +299,7 @@ const InputForm = () => {
                     data={data}
                     index={index}
                     isActive={index === activeGraphIndex}
+                    onClick={handleGraphClick}
                   />
                 ))}
 
@@ -308,6 +313,7 @@ const InputForm = () => {
                             data={data}
                             index={index + 3}
                             isActive={index + 3 === activeGraphIndex}
+                            onClick={handleGraphClick}
                           />
                         ))}
                       </div>
@@ -323,28 +329,27 @@ const InputForm = () => {
                   </>
                 )}
               </div>
-
-              <div className="items-center flex flex-col justify-around">
-                <button
-                  className={`bg-blue-500 text-white px-4 py-2 rounded ${
-                    responseData.length <= 1 || activeGraphIndex === 0 ? "" : ""
-                  }`}
-                  onClick={handlePreviousGraphClick}
-                >
-                  {"<"}
-                </button>
-                <button
-                  className={`bg-green-500 text-white px-4 py-2 rounded ${
-                    responseData.length <= 1 ||
-                    activeGraphIndex === responseData.length - 1
-                      ? "hidden"
-                      : ""
-                  }`}
-                  onClick={handleNextGraphClick}
-                >
-                  {activeGraphIndex === responseData.length - 1 ? "Done" : ">"}
-                </button>
-              </div>
+            </div>
+            <div className="items-center flex flex-row justify-around">
+              <button
+                className={`bg-blue-500 text-white px-4 py-2 rounded ${
+                  responseData.length <= 1 || activeGraphIndex === 0 ? "" : ""
+                }`}
+                onClick={handlePreviousGraphClick}
+              >
+                {"<"}
+              </button>
+              <button
+                className={`bg-green-500 text-white px-4 py-2 rounded ${
+                  responseData.length <= 1 ||
+                  activeGraphIndex === responseData.length - 1
+                    ? "hidden"
+                    : ""
+                }`}
+                onClick={handleNextGraphClick}
+              >
+                {activeGraphIndex === responseData.length - 1 ? "Done" : ">"}
+              </button>
             </div>
           </div>
         )}

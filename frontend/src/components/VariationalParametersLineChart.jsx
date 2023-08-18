@@ -9,10 +9,13 @@ import {
   Legend,
   BarChart,
   Bar,
+  ReferenceLine,
 } from "recharts";
 
 const VariationalParametersLineChart = ({ variationalParameters }) => {
   const [chartView, setChartView] = useState("line");
+  const [plotMinima, setPlotMinima] = useState(true);
+  const [plotMaxima, setPlotMaxima] = useState(true);
 
   const toggleChartView = () => {
     setChartView((prevView) => (prevView === "line" ? "bar" : "line"));
@@ -22,6 +25,9 @@ const VariationalParametersLineChart = ({ variationalParameters }) => {
     index: index + 1,
     value,
   }));
+
+  const minima = Math.min(...variationalParameters);
+  const maxima = Math.max(...variationalParameters);
 
   return (
     <div>
@@ -41,7 +47,21 @@ const VariationalParametersLineChart = ({ variationalParameters }) => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="line" dataKey="value" stroke="#8884d8" />
+            <Line type="line" dataKey="value" stroke="#8884d8" strokeWidth={2} />
+            {plotMinima && (
+              <ReferenceLine
+                y={minima}
+                stroke="green"
+                label={`Minima: ${minima.toFixed(3)}`}
+              />
+            )}
+            {plotMaxima && (
+              <ReferenceLine
+                y={maxima}
+                stroke="red"
+                label={`Maxima: ${maxima.toFixed(3)}`}
+              />
+            )}
           </LineChart>
         ) : (
           <BarChart width={1000} height={700} data={data}>
@@ -51,8 +71,45 @@ const VariationalParametersLineChart = ({ variationalParameters }) => {
             <Tooltip />
             <Legend />
             <Bar dataKey="value" fill="#8884d8" />
+            {plotMinima && (
+              <ReferenceLine
+                y={minima}
+                stroke="red"
+                label={`Minima: ${minima.toFixed(3)}`}
+              />
+            )}
+            {plotMaxima && (
+              <ReferenceLine
+                y={maxima}
+                stroke="green"
+                label={`Maxima: ${maxima.toFixed(3)}`}
+              />
+            )}
           </BarChart>
         )}
+      </div>
+
+      <div className="mt-4 bg-[#1c1c1e] p-4 rounded-lg shadow-md border border-gray-200">
+        <p className="text-white items-center flex gap-2">
+          <input
+            type="checkbox"
+            checked={plotMaxima}
+            onChange={() => setPlotMaxima((prev) => !prev)}
+            className="toggle toggle-sm"
+          />
+          <span className="font-semibold text-green-500">Graph Maxima:</span>{" "}
+          {minima.toFixed(3)}{" "}
+        </p>
+        <p className="text-white items-center flex gap-2">
+          <input
+            type="checkbox"
+            checked={plotMinima}
+            onChange={() => setPlotMinima((prev) => !prev)}
+            className="toggle toggle-sm"
+          />
+          <span className="font-semibold text-red-500">Graph Minima:</span>{" "}
+          {maxima.toFixed(3)}{" "}
+        </p>
       </div>
     </div>
   );

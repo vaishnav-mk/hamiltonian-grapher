@@ -8,7 +8,6 @@ from qiskit.opflow import I, Z, X, Y, PauliOp
 from qiskit.circuit.library import TwoLocal
 from qiskit.utils import QuantumInstance
 from fastapi.encoders import jsonable_encoder
-from matplotlib import pyplot as plt
 
 app = FastAPI()
 
@@ -24,11 +23,9 @@ class PauliTerm(BaseModel):
 class HamiltonianInput(BaseModel):
     terms: List[PauliTerm]
 
-def plot(values):
-    plt.plot(values)
-    plt.show()
-
-
+class CalculationStatus(BaseModel):
+    iteration: int
+    status: str
 
 @app.post("/eigen")
 def calculate_eigenvalues(hamiltonian: HamiltonianInput, iterations: int = 5):
@@ -55,7 +52,7 @@ def calculate_eigenvalues(hamiltonian: HamiltonianInput, iterations: int = 5):
 
     backend = Aer.get_backend("aer_simulator")
 
-    optimizer = SPSA(maxiter=100)
+    optimizer = SPSA(maxiter=1)
     vqe = VQE(
         ansatz=ansatz,
         optimizer=optimizer,
@@ -74,6 +71,7 @@ def calculate_eigenvalues(hamiltonian: HamiltonianInput, iterations: int = 5):
          "variational_parameters": var_params,
         }
         results.append(iteration_result)
+        print(f"iteration: {_+1}", result)
     
     # plot(var_params)
 
