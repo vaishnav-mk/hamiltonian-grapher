@@ -97,7 +97,7 @@ const AllVariationalParametersLineChart = ({ allVariationalParameters }) => {
           <input
             type="checkbox"
             checked={plotMinima}
-            onChange={() => setPlotMinima((prev) => !prev)}
+            onChange={() => setPlotMaxima((prev) => !prev)}
             className="toggle toggle-sm"
           />
           <span className="font-semibold text-green-500">Global Maxima:</span>{" "}
@@ -107,7 +107,7 @@ const AllVariationalParametersLineChart = ({ allVariationalParameters }) => {
           <input
             type="checkbox"
             checked={plotMaxima}
-            onChange={() => setPlotMaxima((prev) => !prev)}
+            onChange={() => setPlotMinima((prev) => !prev)}
             className="toggle toggle-sm"
           />
           <span className="font-semibold text-red-500">Global Minima:</span>{" "}

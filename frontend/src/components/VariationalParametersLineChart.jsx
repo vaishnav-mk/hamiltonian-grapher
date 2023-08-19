@@ -98,7 +98,7 @@ const VariationalParametersLineChart = ({ variationalParameters }) => {
             className="toggle toggle-sm"
           />
           <span className="font-semibold text-green-500">Graph Maxima:</span>{" "}
-          {minima.toFixed(3)}{" "}
+          {maxima.toFixed(3)}{" "}
         </p>
         <p className="text-white items-center flex gap-2">
           <input
@@ -108,7 +108,7 @@ const VariationalParametersLineChart = ({ variationalParameters }) => {
             className="toggle toggle-sm"
           />
           <span className="font-semibold text-red-500">Graph Minima:</span>{" "}
-          {maxima.toFixed(3)}{" "}
+          {minima.toFixed(3)}{" "}
         </p>
       </div>
     </div>

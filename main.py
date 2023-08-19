@@ -62,7 +62,7 @@ def calculate_eigenvalues(hamiltonian: HamiltonianInput, iterations: int = 5):
     results = []
     for _ in range(iterations):
         result = vqe.compute_minimum_eigenvalue(hamiltonian_op)
-        eigenstate = str(result.eigenstate)
+        eigenstate = result.eigenstate
         eigenvalue = str(result.eigenvalue)
         var_params = list(result.optimal_parameters.values())
         iteration_result = {

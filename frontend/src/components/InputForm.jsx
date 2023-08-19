@@ -8,7 +8,7 @@ const InputForm = () => {
   const [terms, setTerms] = useState([
     { coefficient: "0.00698131079425246", operator: "IIZ" },
   ]);
-  const [iterations, setIterations] = useState("5");
+  const [iterations, setIterations] = useState("1");
   const [loading, setLoading] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const [inputText, setInputText] = useState("");
