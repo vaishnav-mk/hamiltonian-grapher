@@ -52,7 +52,7 @@ def calculate_eigenvalues(hamiltonian: HamiltonianInput, iterations: int = 5):
 
     backend = Aer.get_backend("aer_simulator")
 
-    optimizer = SPSA(maxiter=1)
+    optimizer = SPSA(maxiter=50)
     vqe = VQE(
         ansatz=ansatz,
         optimizer=optimizer,
@@ -71,8 +71,6 @@ def calculate_eigenvalues(hamiltonian: HamiltonianInput, iterations: int = 5):
          "variational_parameters": var_params,
         }
         results.append(iteration_result)
-        print(f"iteration: {_+1}", result)
+        print(f"iteration: {_+1}")
     
-    # plot(var_params)
-
     return jsonable_encoder(results)
