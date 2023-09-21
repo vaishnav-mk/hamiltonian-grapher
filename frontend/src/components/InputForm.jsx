@@ -6,7 +6,7 @@ import AverageGraph from "./AverageGraph";
 
 const InputForm = () => {
   const [terms, setTerms] = useState([
-    { coefficient: "0.00698131079425246", operator: "IIZ" },
+    { coefficient: "", operator: "" },
   ]);
   const [iterations, setIterations] = useState("1");
   const [loading, setLoading] = useState(false);
@@ -25,7 +25,7 @@ const InputForm = () => {
 
   const handleOperatorChange = (e, index) => {
     const newTerms = [...terms];
-    newTerms[index].operator = e.target.value.replace(/\s/g, "");
+    newTerms[index].operator = e.target.value.replace(/\s/g, "").toUpperCase();
     setTerms(newTerms);
   };
 
@@ -131,7 +131,7 @@ const InputForm = () => {
                   </div>
                   <div>
                     <label className="block mb-2">
-                      <span className="mr-2 text-white">Operator:</span>
+                      <span className="mr-2 text-white">Polystring:</span>
                       <input
                         className=" rounded w-full py-1 px-2"
                         type="text"
