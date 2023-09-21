@@ -1,4 +1,4 @@
-# ctrl-alt-del
+# Hamiltonian Grapher
 Project for [Quantathon](https://quantathon.devfolio.co/prizes)
 
 # `Problem Statement`
@@ -24,6 +24,39 @@ Find the following using SamplingVQE and EsimatorVQE for every step of the itera
 Eigenstates, corresponding eigenvalues, and their probability.
 Also, extract the variational parameters associated with every step of the iteration.
 ```
+
+# `Solution`
+Here's an explanation of the key components of the code:
+
+**Importing Libraries:** The code starts by importing necessary libraries and modules, including FastAPI for creating the API, Pydantic for defining data models, Qiskit for quantum computing, and other relevant dependencies.
+
+**Data Models:**
+- `PauliTerm` and `HamiltonianInput` are Pydantic models used for validating the input data. `PauliTerm` represents a single term in the Hamiltonian, including its coefficient and operator. `HamiltonianInput` is a list of `PauliTerm` instances, representing the entire Hamiltonian.
+
+**CalculationStatus Model:**
+- Another Pydantic model, `CalculationStatus`, is defined to represent the status of the calculation for each iteration. It includes fields for the iteration number and the status.
+
+**FastAPI Setup:**
+- An instance of FastAPI is created as `app`.
+
+**API Endpoint:**
+- The `/eigen` endpoint is defined to receive a POST request. It expects a JSON payload with `HamiltonianInput` data and an optional `iterations` parameter (default is 5).
+
+**Processing Hamiltonian:**
+- The code processes the Hamiltonian input by converting it into a Qiskit `PauliOp`. It iterates through the terms in the Hamiltonian, parses the operator strings, and builds the corresponding Pauli operators (I, X, Y, Z) for each term. These Pauli operators are then combined to create the `hamiltonian_op`.
+
+**Ansatz Setup:**
+- The code sets up an ansatz circuit using `TwoLocal`. It uses the "ry" (Ry) rotation gate and "cz" (Controlled-Z) entanglement, with a specified number of repetitions.
+
+**Backend and Optimizer:**
+- It defines the quantum backend as the Aer simulator and selects the SPSA optimizer with a maximum of 50 iterations.
+
+**VQE Initialization:**
+- The Variational Quantum Eigensolver (VQE) is initialized with the ansatz, optimizer, and quantum instance.
+
+**Iteration and Calculation:**
+- The code then enters a loop for the specified number of iterations. Inside each iteration, it computes the minimum eigenvalue of the Hamiltonian using VQE. It retrieves the eigenstate, eigenvalue, and optimal variational parameters associated with the result.
+
 
 # `Installation`
 
