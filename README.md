@@ -91,7 +91,10 @@ npm run dev
 # `Images`
 ![Cr6Hy9pP](https://github.com/vaishnav-mk/hamiltonian-grapher/assets/84540554/3a8181d2-83d5-42a9-96e6-e57fe270be62)
 
+![image](https://github.com/vaishnav-mk/hamiltonian-grapher/assets/84540554/ed282462-732e-41b9-a4f8-7fc6a93e4241)
 ![image](https://github.com/vaishnav-mk/hamiltonian-grapher/assets/84540554/2fc65bea-96cb-4ba3-a07a-3433f8fe44b1)
 ![image](https://github.com/vaishnav-mk/hamiltonian-grapher/assets/84540554/cc3fa284-58ac-4657-85dd-ab4737125f8c)
 ![image](https://github.com/vaishnav-mk/hamiltonian-grapher/assets/84540554/64c5ff21-d704-4ee9-a0d3-7d61ede3259d)
 ![image](https://github.com/vaishnav-mk/hamiltonian-grapher/assets/84540554/a31e09d6-b76c-4822-ac4f-1ade8fb34b4d)
+![image](https://github.com/vaishnav-mk/hamiltonian-grapher/assets/84540554/f2cc2061-5706-4aae-a3be-e9e8d27303b7)
+![image](https://github.com/vaishnav-mk/hamiltonian-grapher/assets/84540554/29449621-9d5f-4a20-9482-d4c8dd7e72dc)
